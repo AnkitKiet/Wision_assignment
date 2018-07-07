@@ -1,4 +1,4 @@
-package edu.wision_assignment;
+package edu.wision_assignment.ui;
 
 import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import edu.wision_assignment.BaseActivity;
+import edu.wision_assignment.R;
 import edu.wision_assignment.model.User;
 import edu.wision_assignment.pojo.Users;
 import edu.wision_assignment.util.DbInit;
@@ -91,5 +93,3 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 }
-
-

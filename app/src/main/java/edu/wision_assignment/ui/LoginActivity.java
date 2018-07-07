@@ -1,17 +1,16 @@
-package edu.wision_assignment;
+package edu.wision_assignment.ui;
 
 import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.wision_assignment.BaseActivity;
+import edu.wision_assignment.R;
 import edu.wision_assignment.model.User;
 import edu.wision_assignment.util.DbInit;
 
@@ -67,6 +66,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void run() {
                         Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+                        startActivity(getIntentToActivity(LoginActivity.this,DashboardActivity.class));
                     }
                 });
 

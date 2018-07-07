@@ -1,7 +1,10 @@
-package edu.wision_assignment;
+package edu.wision_assignment.ui;
 
 import android.os.Bundle;
 import android.widget.TextView;
+
+import edu.wision_assignment.BaseActivity;
+import edu.wision_assignment.R;
 
 public class SplashActivity extends BaseActivity {
 
