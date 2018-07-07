@@ -42,6 +42,7 @@ public class RegisterActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         dbInit = Room.databaseBuilder(getApplicationContext(),
                 DbInit.class, "sample-db").build();
         btnRegister.setOnClickListener(new View.OnClickListener() {

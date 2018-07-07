@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity {
         protected Void doInBackground(Void... voids) {
 
             //Get From db
-            final User user = dbInit.userDao().getSingleRecord(edtEmail.getText().toString());
+            final User user = dbInit.userDao().getSingleRecord(edtEmail.getText().toString().trim(),edtPassword.getText().toString().trim());
             if (user != null) {
                 runOnUiThread(new Runnable() {
                     @Override

@@ -17,8 +17,8 @@ public interface UserDao {
     @Query("SELECT * FROM User")
     List<User> fetchAllData();
 
-    @Query("SELECT * FROM User WHERE usremail =:user_email")
-    User getSingleRecord(String user_email);
+    @Query("SELECT * FROM User WHERE usremail =:user_email AND usrpassword =:user_pass")
+    User getSingleRecord(String user_email, String user_pass);
 
 
 }

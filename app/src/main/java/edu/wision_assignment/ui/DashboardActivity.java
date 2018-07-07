@@ -49,6 +49,7 @@ public class DashboardActivity extends BaseActivity {
         txtUsername.setText(initSharedPref().getString("username",""));
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Dashboard");
+        checkSession(DashboardActivity.this);
         parseJsonData(loadJsonData(), 0);
         initRV();
 
