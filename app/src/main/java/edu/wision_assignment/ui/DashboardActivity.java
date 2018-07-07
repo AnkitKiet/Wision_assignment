@@ -46,7 +46,7 @@ public class DashboardActivity extends BaseActivity {
         rvPlaylist = (RecyclerView) findViewById(R.id.rvPlaylist);
         txtUsername = (TextView) toolbar.findViewById(R.id.txtUsername);
         progressBar = findViewById(R.id.progressBar);
-
+        txtUsername.setText(initSharedPref().getString("username",""));
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Dashboard");
         parseJsonData(loadJsonData(), 0);

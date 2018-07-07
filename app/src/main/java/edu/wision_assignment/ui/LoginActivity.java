@@ -1,6 +1,7 @@
 package edu.wision_assignment.ui;
 
 import android.arch.persistence.room.Room;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -39,12 +40,18 @@ public class LoginActivity extends BaseActivity {
                 startActivity(getIntentToActivity(LoginActivity.this, RegisterActivity.class));
             }
         });
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new LoginUser().execute();
-            }
-        });
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(edtEmail.getText().toString().trim().equals("") || edtPassword.getText().toString().trim().equals("")) {
+                        Toast.makeText(LoginActivity.this, "Fill All Details", Toast.LENGTH_SHORT).show();
+                    }else{
+                        new LoginUser().execute();
+
+                    }
+                }
+            });
+
 
     }
 
@@ -60,11 +67,14 @@ public class LoginActivity extends BaseActivity {
         protected Void doInBackground(Void... voids) {
 
             //Get From db
-            User user = dbInit.userDao().getSingleRecord(edtEmail.getText().toString());
+            final User user = dbInit.userDao().getSingleRecord(edtEmail.getText().toString());
             if (user != null) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        SharedPreferences.Editor editor = initSharedPref().edit();
+                        editor.putString("username", user.getUsers().getName());
+                        editor.apply();
                         Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
                         setLogin(initSharedPref());
                         startActivity(setClearFlags(getIntentToActivity(LoginActivity.this, DashboardActivity.class)));
