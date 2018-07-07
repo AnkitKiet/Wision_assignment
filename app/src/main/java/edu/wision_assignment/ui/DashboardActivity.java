@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
     private RecyclerView rvPlaylist;
     private PlaylistAdapter adapter;
     private Toolbar toolbar;
+    private TextView txtUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         rvPlaylist = (RecyclerView) findViewById(R.id.rvPlaylist);
+        txtUsername = (TextView) toolbar.findViewById(R.id.txtUsername);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Dashboard");
         parseJsonData(loadJsonData());
@@ -83,5 +89,22 @@ public class DashboardActivity extends AppCompatActivity {
         return json;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.logout) {
+            Toast.makeText(this, "Logout Clicked", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
 

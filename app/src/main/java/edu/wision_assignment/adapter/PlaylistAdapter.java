@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -37,6 +38,18 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Reciew
     @Override
     public void onBindViewHolder(ReciewViewHolder holder, int position) {
         Picasso.get().load(data.get(position)).into(holder.imageItem);
+        holder.btnComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Comment Event Detected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.btnLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Video Liked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -49,10 +62,12 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Reciew
 
 
         ImageView imageItem;
+        Button btnLike, btnComment;
 
         public ReciewViewHolder(View view) {
             super(view);
-
+            btnLike = view.findViewById(R.id.btnLike);
+            btnComment = view.findViewById(R.id.btnComment);
             imageItem = (ImageView) view.findViewById(R.id.imgFeed);
 
         }

@@ -15,9 +15,6 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        /*
-         * TODO Check to be performed for user already logged In
-         */
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -27,7 +24,12 @@ public class SplashActivity extends BaseActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    startActivity(getIntentToActivity(SplashActivity.this, LoginActivity.class));
+                    if (isLoggedIn(initSharedPref())) {
+                        startActivity(getIntentToActivity(SplashActivity.this, DashboardActivity.class));
+
+                    } else {
+                        startActivity(getIntentToActivity(SplashActivity.this, LoginActivity.class));
+                    }
                 }
             }
         };

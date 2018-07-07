@@ -66,7 +66,8 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void run() {
                         Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
-                        startActivity(getIntentToActivity(LoginActivity.this,DashboardActivity.class));
+                        setLogin(initSharedPref());
+                        startActivity(getIntentToActivity(LoginActivity.this, DashboardActivity.class));
                     }
                 });
 
