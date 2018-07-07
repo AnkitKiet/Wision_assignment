@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/dirty_white">
 
     <include
         android:id="@+id/toolbar"
@@ -12,14 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:hint="Enter Name" />
+        android:hint="Enter Name"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtName"
-        android:hint="Enter Email" />
+        android:hint="Enter Email"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/edtAge"
@@ -27,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edtEmail"
         android:hint="Enter Age"
-        android:inputType="number" />
+        android:inputType="number"
+        android:padding="10dp" />
 
     <Spinner
         android:id="@+id/spinGender"
@@ -41,8 +45,10 @@
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/spinGender"
         android:hint="Enter Password"
-        android:layout_below="@+id/spinGender"/>
+        android:inputType="textPassword"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/btnRegister"

@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity {
                     public void run() {
                         Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
                         setLogin(initSharedPref());
-                        startActivity(getIntentToActivity(LoginActivity.this, DashboardActivity.class));
+                        startActivity(setClearFlags(getIntentToActivity(LoginActivity.this, DashboardActivity.class)));
                     }
                 });
 
@@ -88,5 +88,8 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

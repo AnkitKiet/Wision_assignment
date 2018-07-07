@@ -25,8 +25,7 @@ public class SplashActivity extends BaseActivity {
                     e.printStackTrace();
                 } finally {
                     if (isLoggedIn(initSharedPref())) {
-                        startActivity(getIntentToActivity(SplashActivity.this, DashboardActivity.class));
-
+                        startActivity(setClearFlags(getIntentToActivity(SplashActivity.this, DashboardActivity.class)));
                     } else {
                         startActivity(getIntentToActivity(SplashActivity.this, LoginActivity.class));
                     }
@@ -34,5 +33,10 @@ public class SplashActivity extends BaseActivity {
             }
         };
         thread.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SplashActivity">
+    tools:context=".ui.SplashActivity"
+    android:background="@color/splash">
 
 
     <TextView
@@ -12,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Welcome..."
+        android:textSize="16sp"
+        android:textColor="@color/white"
         android:textAlignment="center" />
 
 

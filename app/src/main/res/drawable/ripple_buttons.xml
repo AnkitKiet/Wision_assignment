@@ -3,7 +3,7 @@
     android:color="@color/colorPrimaryDark">
     <item
         android:id="@android:id/mask"
-        android:drawable="@color/colorPrimary"></item>
-    <item android:drawable="@color/colorAccent"></item>
+        android:drawable="@color/green"></item>
+    <item android:drawable="@color/green"></item>
 
 </ripple>

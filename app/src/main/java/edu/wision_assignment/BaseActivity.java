@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
+import edu.wision_assignment.ui.LoginActivity;
+
 public class BaseActivity extends AppCompatActivity {
 
     SharedPreferences pref;
@@ -41,4 +43,20 @@ public class BaseActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    public void checkSession(Context first) {
+        if (isLoggedIn(initSharedPref())) {
+            //Can Implement Something For This
+        } else {
+            Intent intent = setClearFlags(getIntentToActivity(first, LoginActivity.class));
+            startActivity(intent);
+        }
+    }
+
+
+    public Intent setClearFlags(Intent intent){
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
 }
