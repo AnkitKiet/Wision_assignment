@@ -20,5 +20,7 @@ public interface UserDao {
     @Query("SELECT * FROM User WHERE usremail =:user_email AND usrpassword =:user_pass")
     User getSingleRecord(String user_email, String user_pass);
 
+    @Query("SELECT * FROM User WHERE usremail =:user_email")
+    User authEmail(String user_email);
 
 }

@@ -14,6 +14,7 @@ import edu.wision_assignment.BaseActivity;
 import edu.wision_assignment.R;
 import edu.wision_assignment.model.User;
 import edu.wision_assignment.util.DbInit;
+import edu.wision_assignment.util.Validations;
 
 public class LoginActivity extends BaseActivity {
 
@@ -40,17 +41,21 @@ public class LoginActivity extends BaseActivity {
                 startActivity(getIntentToActivity(LoginActivity.this, RegisterActivity.class));
             }
         });
-            btnSubmit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(edtEmail.getText().toString().trim().equals("") || edtPassword.getText().toString().trim().equals("")) {
-                        Toast.makeText(LoginActivity.this, "Fill All Details", Toast.LENGTH_SHORT).show();
-                    }else{
-                        new LoginUser().execute();
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edtEmail.getText().toString().trim().equals("") || edtPassword.getText().toString().trim().equals("")) {
+                    Toast.makeText(LoginActivity.this, "Fill All Details", Toast.LENGTH_SHORT).show();
+                } else {
+                    Validations objValidation = new Validations();
 
-                    }
+                    if (objValidation.validateEmail(edtEmail.getText().toString().trim()))
+                        new LoginUser().execute();
+                    else
+                        Toast.makeText(LoginActivity.this, "Enter Valid Email", Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
 
 
     }
@@ -67,7 +72,7 @@ public class LoginActivity extends BaseActivity {
         protected Void doInBackground(Void... voids) {
 
             //Get From db
-            final User user = dbInit.userDao().getSingleRecord(edtEmail.getText().toString().trim(),edtPassword.getText().toString().trim());
+            final User user = dbInit.userDao().getSingleRecord(edtEmail.getText().toString().trim(), edtPassword.getText().toString().trim());
             if (user != null) {
                 runOnUiThread(new Runnable() {
                     @Override

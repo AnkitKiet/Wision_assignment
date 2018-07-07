@@ -16,6 +16,7 @@ import edu.wision_assignment.R;
 import edu.wision_assignment.model.User;
 import edu.wision_assignment.pojo.Users;
 import edu.wision_assignment.util.DbInit;
+import edu.wision_assignment.util.Validations;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -36,7 +37,7 @@ public class RegisterActivity extends BaseActivity {
         btnRegister = (Button) findViewById(R.id.btnRegister);
         edtName = (EditText) findViewById(R.id.edtName);
         edtAge = (EditText) findViewById(R.id.edtAge);
-        edtEmail = (EditText)findViewById(R.id.edtEmail);
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
         spinGender = (Spinner) findViewById(R.id.spinGender);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -52,7 +53,13 @@ public class RegisterActivity extends BaseActivity {
                 String email = edtEmail.getText().toString();
                 String name = edtName.getText().toString();
                 if (!age.equals("") || !email.equals("") || !name.equals("")) {
-                    new RegisterUser().execute();
+
+                    Validations objValidation = new Validations();
+
+                    if (objValidation.validateEmail(edtEmail.getText().toString().trim()))
+                        new RegisterUser().execute();
+                    else
+                        Toast.makeText(RegisterActivity.this, "Enter Valid Email", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(RegisterActivity.this, "Fill All Details", Toast.LENGTH_SHORT).show();
                 }
@@ -81,8 +88,27 @@ public class RegisterActivity extends BaseActivity {
             users.setName(edtName.getText().toString());
             user.setUsers(users);
 
+            final User user_exist = dbInit.userDao().authEmail(edtEmail.getText().toString().trim());
+            if (user_exist == null) {
+                dbInit.userDao().insertOnlySingleRecord(user);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+                        startActivity(getIntentToActivity(RegisterActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                });
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(RegisterActivity.this, "User Already Exist", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
             //Insert Into db
-            dbInit.userDao().insertOnlySingleRecord(user);
 
             return null;
         }
@@ -90,7 +116,6 @@ public class RegisterActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
         }
     }
 }
